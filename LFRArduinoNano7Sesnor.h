@@ -2,8 +2,6 @@
 #define __LFR_ARDUINO_NANO_7SENS_H
 
 #include "Arduino.h"
-
-
 #include <TimerOne.h>
 #include <EEPROM.h>
 
@@ -11,13 +9,16 @@
 class LFR
 {
   public:
-	void Init();
-	void Initialize(float _kp, float _ki, float _kd);
-	void moveForward(unsigned int _speed);
+	void Init(); //Initialize
+	void Initialize(float _kp, float _ki, float _kd); // Initialize constants of Kp, Ki and Kd
+	void moveForward(unsigned int _speed); 
 	void stop();
 	void turnRight(unsigned int _speed);
 	void turnLeft(unsigned int _speed);
   private:
+//==============================================================	
+//Define to control Motor and implemented using Arduino Nano
+//==============================================================
 	int pwmLeftMotorPin = 9;
 	int pwmRightMotorPin = 10;
 	int dirALeftMotorPin = 8;
@@ -25,10 +26,11 @@ class LFR
 	int dirARightMotorPin = 12;
 	int dirBRightMotorPin = 13;
 	
-	#define numSens 7
-	
+//==============================================================	
+//============================ Proximity Sensors
+//==============================================================
+	#define numSens 7   // The number of Proximity Sensors
 	unsigned char lineSensor;
-	
 	enum _sens{
 		right3Sens,
 		right2Sens,
@@ -43,9 +45,8 @@ class LFR
 	unsigned int maxSens[numSens], minSens[numSens], refSens[numSens];
 	unsigned char sensIO[numSens];
 	
-	int batSensPin = A7;
-
-	int startButton_pin = 0;
+	int batSensPin = A7; // Voltage indicator
+	int startButton_pin = 0; 
 	int menuButton_pin = 1;
 	
 	const unsigned long samplingPID = 50;
